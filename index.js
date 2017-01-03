@@ -23,7 +23,7 @@ const verboseError = message => {
 	verboseLog(message, true);
 };
 
-const createJobValidator = (numInputArtifacts, numOutputArtifacts) => {
+const createJobValidator = (numInputArtifacts, numOutputArtifacts, extraValidation) => {
 	return job => {
 		verboseLog('Validating CodePipeline job:');
 		verboseLog(JSON.stringify(job, null, 2));
@@ -48,14 +48,21 @@ const createJobValidator = (numInputArtifacts, numOutputArtifacts) => {
 			throw new Error(`CodePipeline job data contained ${job.data.outputArtifacts.length} output artifact(s), but action was expecting ${numOutputArtifacts}`);
 		}
 
-		verboseLog('Creating S3 instance');
+		if (numInputArtifacts + numOutputArtifacts > 0) {
+			verboseLog('Creating S3 instance');
+			job.s3 = new AWS.S3({
+				signatureVersion: 'v4',
+				secretAccessKey: job.data.artifactCredentials.secretAccessKey,
+				sessionToken: job.data.artifactCredentials.sessionToken,
+				accessKeyId: job.data.artifactCredentials.accessKeyId,
+			});
+		} else {
+			verboseLog('No need for S3 instance');
+		}
 
-		job.s3 = new AWS.S3({
-			signatureVersion: 'v4',
-			secretAccessKey: job.data.artifactCredentials.secretAccessKey,
-			sessionToken: job.data.artifactCredentials.sessionToken,
-			accessKeyId: job.data.artifactCredentials.accessKeyId,
-		});
+		if (extraValidation) {
+			return extraValidation(job);
+		}
 
 		return job;
 	};
