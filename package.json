@@ -1,0 +1,34 @@
+{
+  "name": "codepipeline-custom-action",
+  "version": "0.1.0",
+  "description": "CodePipeline custom action Lambda function wrapper",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qblu/codepipeline-custom-action.git"
+  },
+  "keywords": [
+    "aws",
+    "lambda",
+    "promise",
+    "handler",
+    "codepipeline"
+  ],
+  "author": "Joe Lafiosca <joe@quasarblu.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/qblu/codepipeline-custom-action/issues"
+  },
+  "homepage": "https://github.com/qblu/codepipeline-custom-action#readme",
+  "dependencies": {
+    "adm-zip": "^0.4.7",
+    "bluebird": "^3.4.7",
+    "promiser-to-lambda": "^1.0.0"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.7.20"
+  }
+}
