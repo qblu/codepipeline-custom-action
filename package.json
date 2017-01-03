@@ -1,6 +1,6 @@
 {
   "name": "codepipeline-custom-action",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "CodePipeline custom action Lambda function wrapper",
   "main": "index.js",
   "scripts": {
