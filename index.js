@@ -261,4 +261,6 @@ module.exports = {
 	defaultOnJobCompletion,
 	defaultOnJobFailure,
 	createAction,
+	verboseLog,
+	verboseError,
 };
