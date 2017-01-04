@@ -14,7 +14,7 @@ Provide a handler function to the `createAction` method. Your handler function m
 
 Here is an example of a custom action that will accept CloudFormation results as input and return an array of the Lambda ARNs found in those results:
 
-```
+```javascript
 'use strict';
 
 const createAction = require('codepipeline-custom-action').createAction;
